@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:short_point/feature/todo/presentation/todo_main_page.dart';
+
+import 'feature/todo/presentation/pages/todo_main_page.dart';
+
 
 void main() {
   runApp(const MyApp());

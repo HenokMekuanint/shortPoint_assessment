@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:short_point/feature/todo/domain/entities/task_entity.dart';
 import 'package:short_point/feature/todo/presentation/widgets/task_widget.dart';
 
 import 'add_task.dart';
@@ -9,6 +10,8 @@ class TodoHomePage extends StatefulWidget {
 
   @override
   State<TodoHomePage> createState() => _TodoHomePageState();
+
+ 
 }
 
 class _TodoHomePageState extends State<TodoHomePage> {
@@ -20,11 +23,24 @@ class _TodoHomePageState extends State<TodoHomePage> {
           child: FloatingActionButton(
             backgroundColor: Color(0XFF3556AB),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return AddTask();
-              }));
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  transitionDuration: Duration(milliseconds: 500),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return AddTask();
+                  },
+                ),
+              );
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child: Icon(Icons.add),
           ),
         ),
         backgroundColor: Color(0XFFF3F3F3),

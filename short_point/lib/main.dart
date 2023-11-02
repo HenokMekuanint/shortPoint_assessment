@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         showSemanticsDebugger: false,
-        title: 'Flutter Demo',
+        title: 'Todo App',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          
           useMaterial3: true,
         ),
         home: TodoHomePage(),

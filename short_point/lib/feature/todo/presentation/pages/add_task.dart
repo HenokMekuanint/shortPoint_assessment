@@ -7,15 +7,10 @@ import '../../domain/entities/task_entity.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 
-class AddTask extends StatefulWidget {
-  final TasksController tasksController;
-  AddTask({super.key, required this.tasksController});
+class AddTask extends StatelessWidget {
+  final Function(Task) onTaskAdded;
+  AddTask({super.key, required this.onTaskAdded});
 
-  @override
-  State<AddTask> createState() => _AddTaskState();
-}
-
-class _AddTaskState extends State<AddTask> {
   TextEditingController _taskNameController = TextEditingController();
 
   @override
@@ -26,24 +21,11 @@ class _AddTaskState extends State<AddTask> {
       String taskName = _taskNameController.text;
       Task newTask = Task(
           id: DateTime.now().toString(), name: taskName, isCompleted: false);
-      widget.tasksController.addTask(newTask);
+
+      onTaskAdded(newTask);
+
       _taskNameController.clear();
-      Navigator.push(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: Duration(milliseconds: 500),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return TodoHomePage();
-                  },
-                ),
-              );
+      Navigator.pop(context);
     }
 
     return SafeArea(

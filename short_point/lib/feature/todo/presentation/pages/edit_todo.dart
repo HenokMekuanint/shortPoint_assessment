@@ -6,20 +6,41 @@ import 'package:short_point/feature/todo/domain/entities/tasks.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 
-class EditTask extends StatelessWidget {
-  final int taskid;
-  final TasksController tasksController;
+class EditTask extends StatefulWidget {
+  final int taskId;
+  final Task task;
+  final Function(Task task, int taskId) onTaskEdited;
 
-  EditTask({super.key, required this.taskid, required this.tasksController});
+  EditTask(
+      {super.key,
+      required this.taskId,
+      required this.task,
+      required this.onTaskEdited});
+
+  @override
+  State<EditTask> createState() => _EditTaskState();
+}
+
+class _EditTaskState extends State<EditTask> {
   TextEditingController _taskNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _taskNameController.text = widget.task.name;
+  }
 
   @override
   Widget build(BuildContext context) {
     void handleOnPressed() {
-      tasksController.taskList[taskid] = Task(
-          id: tasksController.taskList[taskid].id,
+      Task editedTask = Task(
+          id: widget.task.id,
           name: _taskNameController.text,
-          isCompleted: tasksController.taskList[taskid].isCompleted);
+          isCompleted: widget.task.isCompleted);
+
+      widget.onTaskEdited(editedTask, widget.taskId);
+
+      Navigator.pop(context);
     }
 
     return SafeArea(

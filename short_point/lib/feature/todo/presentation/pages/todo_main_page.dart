@@ -5,6 +5,7 @@ import 'package:short_point/feature/todo/domain/entities/tasks.dart';
 import 'package:short_point/feature/todo/presentation/widgets/task_widget.dart';
 
 import 'add_task.dart';
+import 'edit_todo.dart';
 
 class TodoHomePage extends StatefulWidget {
   TodoHomePage({super.key});
@@ -14,7 +15,42 @@ class TodoHomePage extends StatefulWidget {
 }
 
 class _TodoHomePageState extends State<TodoHomePage> {
-  TasksController tasksController = TasksController();
+  List<Task> taskList = [];
+
+  void addTaskToList(Task newTask) {
+    setState(() {
+      taskList.add(newTask);
+    });
+  }
+
+  void editTask(Task task, int taskId) {
+    setState(() {
+      taskList[taskId] = task;
+    });
+  }
+
+  void callEditPage(Task task, int taskIndex) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 500),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return EditTask(
+            onTaskEdited: editTask,
+            task: task,
+            taskId: taskIndex,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +71,9 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     );
                   },
                   pageBuilder: (context, animation, secondaryAnimation) {
-                    return AddTask(tasksController: tasksController,);
+                    return AddTask(
+                      onTaskAdded: addTaskToList,
+                    );
                   },
                 ),
               );
@@ -154,14 +192,14 @@ class _TodoHomePageState extends State<TodoHomePage> {
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemCount: tasksController.taskList.length,
+                  itemCount: taskList.length,
                   itemBuilder: (context, index) {
                     return TaskWidget(
-                      taskName: tasksController.taskList[index].name,
-                      isCompleted: tasksController.taskList[index].isCompleted,
-                      onToggleCheckbox: (bool? newValue) {
-                        
-                      },
+                      task: taskList[index],
+                      callTaskEditPage: callEditPage,
+                      taskIndex: index,
+                      isCompleted: taskList[index].isCompleted,
+                      onToggleCheckbox: (bool? newValue) {},
                     );
                   }),
             )

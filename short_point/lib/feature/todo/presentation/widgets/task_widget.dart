@@ -3,16 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/task_entity.dart';
+
 class TaskWidget extends StatefulWidget {
-  final String taskName;
   final bool isCompleted;
   final ValueChanged<bool?> onToggleCheckbox;
 
+  final Function(Task task, int taskIdex) callTaskEditPage;
+  final Task task;
+  final int taskIndex;
+
   const TaskWidget({
     Key? key,
-    required this.taskName,
     required this.isCompleted,
+    required this.taskIndex,
+    required this.task,
     required this.onToggleCheckbox,
+    required this.callTaskEditPage,
   }) : super(key: key);
 
   @override
@@ -62,7 +69,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                         unselectedWidgetColor: Colors.transparent,
                         checkboxTheme: CheckboxThemeData(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
+                            borderRadius: BorderRadius.circular(
+                                15.0), // Adjust the radius as needed
                           ),
                         ),
                       ),
@@ -76,11 +84,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                               widget.onToggleCheckbox(value);
                             });
                           },
-                          fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                          fillColor: MaterialStateProperty.resolveWith<Color>(
+                              (states) {
                             if (states.contains(MaterialState.selected)) {
-                              return const Color(0xFF399649); // Change the checkbox color here
+                              return const Color(
+                                  0xFF399649); // Change the checkbox color here
                             }
-                            return Colors.white; // Change the default color here
+                            return Colors
+                                .white; // Change the default color here
                           }),
                         ),
                       ),
@@ -88,9 +99,11 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ),
                 Text(
-                  widget.taskName,
+                  widget.task.name,
                   style: TextStyle(
-                    decoration: isChecked ? TextDecoration.lineThrough : TextDecoration.none,
+                    decoration: isChecked
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
                   ),
                 ),
               ],
@@ -99,14 +112,15 @@ class _TaskWidgetState extends State<TaskWidget> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               fixedSize: Size(80.w, 60.h),
-              side: const BorderSide(width: 1.0, color: Colors.black), // Set border color
+              side: const BorderSide(
+                  width: 1.0, color: Colors.black), // Set border color
               backgroundColor: Colors.white, // Set central color to white
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
               ),
             ),
             onPressed: () {
-              // Add your onPressed logic here
+              widget.callTaskEditPage(widget.task, widget.taskIndex);
             },
             child: Text(
               "Edit",
@@ -121,4 +135,3 @@ class _TaskWidgetState extends State<TaskWidget> {
     );
   }
 }
-

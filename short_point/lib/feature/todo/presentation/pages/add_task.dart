@@ -4,15 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 
-class EditTask extends StatelessWidget {
-  EditTask({super.key});
-  TextEditingController _taskNameController = TextEditingController();
+class AddTask extends StatelessWidget {
+ AddTask({super.key});
+
+   TextEditingController _taskNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    void handleOnPressed() {
-      print("Updating task: ${_taskNameController.text}");
+    void handleAddTask() {
+      print("Adding task: ${_taskNameController.text}");
+      
     }
+
+   
 
     return SafeArea(
       child: Scaffold(
@@ -20,7 +24,7 @@ class EditTask extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.h),
           child: const CustomAppBar(
-            title: "Edit Task",
+            title: "Add Task",
           ),
         ),
         body: Column(
@@ -80,7 +84,7 @@ class EditTask extends StatelessWidget {
               ],
             ),
             CustomElevatedButton(
-              onPressed: handleOnPressed,
+              onPressed: handleAddTask,
             )
           ],
         ),

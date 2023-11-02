@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:short_point/feature/todo/presentation/pages/edit_todo.dart';
 
 import 'feature/todo/presentation/pages/todo_main_page.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MyHomePage(),
+        home: EditTask(),
       ),
     );
   }

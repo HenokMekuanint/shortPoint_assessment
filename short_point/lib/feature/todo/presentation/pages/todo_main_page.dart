@@ -34,7 +34,7 @@ class _TodoHomePageState extends State<TodoHomePage> {
             Container(
               color: Color(0XFF3556AB),
               width: double.infinity,
-              height: 123.h,
+              height: 130.h,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -53,11 +53,24 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Hello,jhon"),
+                        Text("Hello,jhon",
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          fontSize: 16.sp
+                        ),
+                        ),
                         Container(
                           width: 220.w,
-                          height: 52.h,
-                          child: Text("What are your plans today ?"),
+                          height: 65.h,
+                          child: Text("What are your plans today ?",
+                          style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          fontSize: 18.sp
+                        ),
+                          
+                          ),
                         )
                       ],
                     ),
@@ -88,11 +101,22 @@ class _TodoHomePageState extends State<TodoHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Go Pro (No Ads)"),
+                        Text("Go Pro (No Ads)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0XFF071D55),
+                          fontSize: 20.sp
+                        ),
+                        ),
                         Container(
                           width: 190.w,
                           height: 46.h,
-                          child: Text("No fuss, no ads, for only \$1 a month"),
+                          child: Text("No fuss, no ads, for only \$1 a month",
+                          style: TextStyle(
+                          color: Color(0XFF0D2972),
+                          fontSize: 12.sp
+                        ),
+                          ),
                         )
                       ],
                     ),

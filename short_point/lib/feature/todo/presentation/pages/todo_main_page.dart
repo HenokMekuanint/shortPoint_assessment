@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:short_point/feature/todo/domain/entities/task_entity.dart';
+import 'package:short_point/feature/todo/domain/entities/tasks.dart';
 import 'package:short_point/feature/todo/presentation/widgets/task_widget.dart';
 
 import 'add_task.dart';
@@ -10,11 +11,10 @@ class TodoHomePage extends StatefulWidget {
 
   @override
   State<TodoHomePage> createState() => _TodoHomePageState();
-
- 
 }
 
 class _TodoHomePageState extends State<TodoHomePage> {
+  TasksController tasksController = TasksController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +35,7 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     );
                   },
                   pageBuilder: (context, animation, secondaryAnimation) {
-                    return AddTask();
+                    return AddTask(tasksController: tasksController,);
                   },
                 ),
               );
@@ -69,23 +69,22 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Hello,jhon",
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.white,
-                          fontSize: 16.sp
-                        ),
+                        Text(
+                          "Hello,jhon",
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              color: Colors.white,
+                              fontSize: 16.sp),
                         ),
                         Container(
                           width: 220.w,
                           height: 65.h,
-                          child: Text("What are your plans today ?",
-                          style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.white,
-                          fontSize: 18.sp
-                        ),
-                          
+                          child: Text(
+                            "What are your plans today ?",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                color: Colors.white,
+                                fontSize: 18.sp),
                           ),
                         )
                       ],
@@ -117,21 +116,20 @@ class _TodoHomePageState extends State<TodoHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Go Pro (No Ads)",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0XFF071D55),
-                          fontSize: 20.sp
-                        ),
+                        Text(
+                          "Go Pro (No Ads)",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0XFF071D55),
+                              fontSize: 20.sp),
                         ),
                         Container(
                           width: 190.w,
                           height: 46.h,
-                          child: Text("No fuss, no ads, for only \$1 a month",
-                          style: TextStyle(
-                          color: Color(0XFF0D2972),
-                          fontSize: 12.sp
-                        ),
+                          child: Text(
+                            "No fuss, no ads, for only \$1 a month",
+                            style: TextStyle(
+                                color: Color(0XFF0D2972), fontSize: 12.sp),
                           ),
                         )
                       ],
@@ -156,13 +154,13 @@ class _TodoHomePageState extends State<TodoHomePage> {
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemCount: 14,
+                  itemCount: tasksController.taskList.length,
                   itemBuilder: (context, index) {
                     return TaskWidget(
-                      taskName: "asd",
-                      isCompleted: true,
+                      taskName: tasksController.taskList[index].name,
+                      isCompleted: tasksController.taskList[index].isCompleted,
                       onToggleCheckbox: (bool? newValue) {
-                        // Add the logic to handle the toggling of the checkbox here
+                        
                       },
                     );
                   }),

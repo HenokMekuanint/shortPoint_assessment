@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:short_point/feature/todo/domain/entities/task_entity.dart';
+import 'package:short_point/feature/todo/domain/entities/tasks.dart';
 
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 
 class EditTask extends StatelessWidget {
-  EditTask({super.key});
+  final int taskid;
+  final TasksController tasksController;
+
+  EditTask({super.key, required this.taskid, required this.tasksController});
   TextEditingController _taskNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     void handleOnPressed() {
-      print("Updating task: ${_taskNameController.text}");
+      tasksController.taskList[taskid] = Task(
+          id: tasksController.taskList[taskid].id,
+          name: _taskNameController.text,
+          isCompleted: tasksController.taskList[taskid].isCompleted);
     }
 
     return SafeArea(

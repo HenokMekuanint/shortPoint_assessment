@@ -23,7 +23,18 @@ class _TaskWidgetState extends State<TaskWidget> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w,vertical: 20.h),
       padding: EdgeInsets.only(right: 15.w),
-      color: Colors.white,
+      decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(8.0),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 3,
+        blurRadius: 7,
+        offset: Offset(0, 3), // changes position of shadow
+      ),
+    ],
+  ),
       height: 90.h,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../domain/entities/task_entity.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 
 class AddTask extends StatelessWidget {
- AddTask({super.key});
+  AddTask({super.key});
 
-   TextEditingController _taskNameController = TextEditingController();
+  TextEditingController _taskNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    void handleAddTask() {
-      print("Adding task: ${_taskNameController.text}");
-      
-    }
+    TextEditingController _taskNameController = TextEditingController();
 
-   
+    void handleAddTask() {
+      String taskName = _taskNameController.text;
+      Task newTask = Task(
+          id: DateTime.now().toString(), name: taskName, isCompleted: false);
+      addTaskToList(newTask);
+      
+      _taskNameController.clear();
+    }
 
     return SafeArea(
       child: Scaffold(

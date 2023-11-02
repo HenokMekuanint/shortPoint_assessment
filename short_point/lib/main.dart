@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      
       designSize: Size(390, 844),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MyHomePage(),
+        home: TodoHomePage(),
       ),
     );
   }

@@ -1,39 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyHomePage extends StatefulWidget {
-   MyHomePage({super.key});
-
-
-
+class TodoHomePage extends StatefulWidget {
+  TodoHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TodoHomePage> createState() => _TodoHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  
-
+class _TodoHomePageState extends State<TodoHomePage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            color: Color(0XFF3556AB),
+            width: double.infinity,
+            height: 20.h,
+            child: Row(
+            children: [
+              CircleAvatar(
+                radius: 10.r,
+                child: Image.asset("assets/images/ProfilePicture.png"),
+              ),
+              Column(
+                children: [
+                  Text("Hello,jhon"),
+                  Text("What are your plans today")
+                ],
+              )
+            ],
+          ),
+          ),
 
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(""),
+          Container(
+            width: double.infinity,
+            height: 20.h,
+            color: Color(0XFF9EB031),
+            child: Row(
+              children: [
+                Text("Go Pro (No Ads)"),
+                Text("No fuss, no ads, for only \$1 a month")
+              ],
+            ),
+          )
+        ],
       ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            
-          ],
-        ),
-      ),
-
     );
   }
 }
